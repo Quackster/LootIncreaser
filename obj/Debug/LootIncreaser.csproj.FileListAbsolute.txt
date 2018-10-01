@@ -1,0 +1,7 @@
+C:\Users\Alex\source\repos\LootIncreaser\LootIncreaser\bin\Debug\LootIncreaser.exe.config
+C:\Users\Alex\source\repos\LootIncreaser\LootIncreaser\bin\Debug\LootIncreaser.exe
+C:\Users\Alex\source\repos\LootIncreaser\LootIncreaser\bin\Debug\LootIncreaser.pdb
+C:\Users\Alex\source\repos\LootIncreaser\LootIncreaser\obj\Debug\LootIncreaser.csprojAssemblyReference.cache
+C:\Users\Alex\source\repos\LootIncreaser\LootIncreaser\obj\Debug\LootIncreaser.csproj.CoreCompileInputs.cache
+C:\Users\Alex\source\repos\LootIncreaser\LootIncreaser\obj\Debug\LootIncreaser.exe
+C:\Users\Alex\source\repos\LootIncreaser\LootIncreaser\obj\Debug\LootIncreaser.pdb
