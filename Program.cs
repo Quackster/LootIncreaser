@@ -63,13 +63,12 @@ namespace LootIncreaser
             {
                 var element = type.Attribute("lootmax");
 
-                if (element == null)
-                    continue;
+                if (element != null) {
+                    int nomimal = int.Parse(element.Value);
+                    int newNominal = (nomimal * increaseLootBy);
 
-                int nomimal = int.Parse(element.Value);
-                int newNominal = (nomimal * increaseLootBy);
-
-                type.SetAttributeValue(element.Name, newNominal);
+                    type.SetAttributeValue(element.Name, newNominal);
+                }
             }
 
             types = doc.Descendants("group");
@@ -78,13 +77,34 @@ namespace LootIncreaser
             {
                 var element = type.Attribute("lootmax");
 
-                if (element == null)
-                    continue;
+                if (element != null)
+                {
+                    int nomimal = int.Parse(element.Value);
+                    int newNominal = (nomimal * increaseLootBy);
 
-                int nomimal = int.Parse(element.Value);
-                int newNominal = (nomimal * increaseLootBy);
+                    type.SetAttributeValue(element.Name, newNominal);
+                }
 
-                type.SetAttributeValue(element.Name, newNominal);
+
+                bool hasMilitary = false;
+
+                var subElements = type.Elements();
+
+                foreach (var subElement in subElements)
+                {
+                    if (subElement.Name == "usage" && subElement.Attribute("name").Value == "Military")
+                    {
+                        hasMilitary = true;
+                    }
+                }
+
+                if (!hasMilitary)
+                {
+                    var militaryElement = new XElement("usage");
+                    militaryElement.Add(new XAttribute("name", "Military"));
+
+                    type.AddFirst(militaryElement);
+                }
             }
 
             doc.Save("mapgroupproto_new.xml");
