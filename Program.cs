@@ -23,7 +23,7 @@ namespace LootIncreaser
                 }
                 else
                 {
-                    DoIncreaseLoot("types.xml", increaseLootBy);
+                    DoIncreaseLoot(increaseLootBy);
                 }
             }
             catch (Exception ex)
@@ -34,9 +34,11 @@ namespace LootIncreaser
             Console.Read();
         }
 
-        private static void DoIncreaseLoot(string fileName, int increaseLootBy)
+        private static void DoIncreaseLoot(int increaseLootBy)
         {
-            XDocument doc = XDocument.Load(fileName);
+            XDocument doc;
+            
+            doc = XDocument.Load("types.xml");
             var types = doc.Descendants("type");
 
             foreach (var type in types)
@@ -53,6 +55,39 @@ namespace LootIncreaser
             }
 
             doc.Save("types_new.xml");
+
+            doc = XDocument.Load("mapgroupproto.xml");
+            types = doc.Descendants("container");
+
+            foreach (var type in types)
+            {
+                var element = type.Attribute("lootmax");
+
+                if (element == null)
+                    continue;
+
+                int nomimal = int.Parse(element.Value);
+                int newNominal = (nomimal * increaseLootBy);
+
+                type.SetAttributeValue(element.Name, newNominal);
+            }
+
+            types = doc.Descendants("group");
+
+            foreach (var type in types)
+            {
+                var element = type.Attribute("lootmax");
+
+                if (element == null)
+                    continue;
+
+                int nomimal = int.Parse(element.Value);
+                int newNominal = (nomimal * increaseLootBy);
+
+                type.SetAttributeValue(element.Name, newNominal);
+            }
+
+            doc.Save("mapgroupproto_new.xml");
         }
     }
 }
