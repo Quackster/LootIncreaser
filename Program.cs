@@ -13,7 +13,12 @@ namespace LootIncreaser
     {
         static void Main(string[] args)
         {
-            int increaseLootBy = 5;
+            int increaseLootBy = 2;
+
+            if (!Directory.Exists("output"))
+            {
+                Directory.CreateDirectory("output");
+            }
 
             try
             {
@@ -54,7 +59,7 @@ namespace LootIncreaser
                 type.SetElementValue(element.Name, newNominal);
             }
 
-            doc.Save("types_new.xml");
+            doc.Save("output/types.xml");
 
             doc = XDocument.Load("mapgroupproto.xml");
             types = doc.Descendants("container");
@@ -107,7 +112,7 @@ namespace LootIncreaser
                 }
             }
 
-            doc.Save("mapgroupproto_new.xml");
+            doc.Save("output/mapgroupproto.xml");
         }
     }
 }
